@@ -212,14 +212,14 @@
 	{/if}
 {/await}
 
-<div class="overlay-container element-overlay" style={currentOffsetStyle}>
-	<ElementOverlay {element} />
+<div class="overlay-container element-overlay" >
+	<ElementOverlay {element} offset={currentOffset}/>
 
 	{#each compute as el, i}
 		{@const next = compute[i + 1]}
 		<ElementOverlay element={el} noDetails />
 		{#if next}
-			<ElementOverlay element={next} noDetails />
+			<ElementOverlay element={next} noDetails offset={currentOffset}/>
 			<DistanceMarker element1={el} element2={next} offset={currentOffset} />
 		{/if}
 	{/each}

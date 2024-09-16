@@ -3,6 +3,7 @@
 
 	export let element: Element | null = null;
 	export let noDetails = false;
+	export let offset = 0;
 
 	function getBounds(element: Element) {
 		const { top, left, width, height } = element.getBoundingClientRect();
@@ -13,7 +14,7 @@
 
 	function getStyleString(bounds: ReturnType<typeof getBounds>) {
 		let result = `font-size: ${bounds.fontSize}; outline: 1px solid #AA0000;`;
-		
+
 		const boxShadows = [];
 		boxShadows.push(...assembleBoxShadow(bounds.padding, '#00FF0070', true));
 		boxShadows.push(...assembleBoxShadow(bounds.margin, '#0000FF70', false));
@@ -63,7 +64,8 @@
 	{@const bounds = getBounds(element)}
 	<div
 		class="element-overlay"
-		style="top: {bounds.top}px; left: {bounds.left}px; width: {bounds.width}px; height: {bounds.height}px;"
+		style="top: {bounds.top -
+			offset}px; left: {bounds.left}px; width: {bounds.width}px; height: {bounds.height}px;"
 	>
 		<div style={getStyleString(bounds)}></div>
 

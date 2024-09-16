@@ -15,8 +15,9 @@ services:
       - WORKSPACE_DELETE_EXPIRED=true
     container_name: 'browserless'
     restart: always
-    env_file:
-      - .env
+    dns:
+      - 195.46.39.39
+      - 195.46.39.40
     networks:
       - browserless_network # to prevent the browserless container from being able to access the traefik_web network
 
@@ -34,8 +35,6 @@ services:
     networks:
       - traefik_web
       - browserless_network
-    env_file:
-      - .env
       
 networks:
   browserless_network:

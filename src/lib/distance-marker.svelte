@@ -92,10 +92,10 @@
 	<div class="element-overlay">
 		<svg width="100vw" height="100vh" class="element-overlay">
 			{#if lines.xLine}
-				<SvgLine line={lines.xLine} {color} />
+				<SvgLine line={lines.xLine} {color} {offset} />
 			{/if}
 			{#if lines.yLine}
-				<SvgLine line={lines.yLine} {color} />
+				<SvgLine line={lines.yLine} {color} {offset} />
 			{/if}
 		</svg>
 	</div>
@@ -106,6 +106,7 @@
 		position: fixed;
 		z-index: 1000000;
 		inset: 0;
+		top: 0px;
 		pointer-events: none;
 	}
 </style>
