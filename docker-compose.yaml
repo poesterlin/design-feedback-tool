@@ -1,0 +1,43 @@
+services:
+  browserless:
+    image: browserless/chrome:latest
+    environment:
+      - DEBUG=browserless:*
+      - MAX_CONCURRENT_SESSIONS=10
+      - CONNECTION_TIMEOUT=60000
+      - MAX_QUEUE_LENGTH=20
+      - PREBOOT_CHROME=true
+      - DEMO_MODE=false
+      - HOST=0.0.0.0
+      - ENABLE_DEBUGGER=false
+      - TOKEN=${BROWSERLESS_TOKEN}
+      - PORT=3000
+      - WORKSPACE_DELETE_EXPIRED=true
+    container_name: 'browserless'
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - browserless_network # to prevent the browserless container from being able to access the traefik_web network
+
+  analyzer:
+    build: .
+    environment:
+      - BROWSERLESS_URL=http://browserless:3000
+      - BROWSERLESS_TOKEN=${BROWSERLESS_TOKEN}
+    container_name: 'analyzer'
+    restart: always
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.analyzer.rule=Host(`analyzer.homelab`)'
+      - 'traefik.http.services.analyzer.loadbalancer.server.port=3000'
+    networks:
+      - traefik_web
+      - browserless_network
+    env_file:
+      - .env
+      
+networks:
+  browserless_network:
+  traefik_web:
+    external: true
