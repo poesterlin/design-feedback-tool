@@ -75,6 +75,7 @@ function dnsLookup(host: string) {
 				reject(new Error(`Failed to resolve DNS for ${host}. This might be intentional.`));
 			}
 
+			console.log(`Resolved DNS for ${host}`);
 			resolve();
 		});
 	});
