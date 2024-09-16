@@ -35,6 +35,8 @@ services:
     networks:
       - traefik_web
       - browserless_network
+    env_file:
+      - .env
       
 networks:
   browserless_network:
