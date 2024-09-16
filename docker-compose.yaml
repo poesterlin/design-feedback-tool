@@ -26,6 +26,7 @@ services:
     environment:
       - BROWSERLESS_HOST=http://browserless:3000
       - BROWSERLESS_TOKEN=${BROWSERLESS_TOKEN}
+      - DNS_SERVER=${DNS_SERVER}
     container_name: 'analyzer'
     restart: always
     labels:
