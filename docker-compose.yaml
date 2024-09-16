@@ -23,7 +23,7 @@ services:
   analyzer:
     build: .
     environment:
-      - BROWSERLESS_URL=http://browserless:3000
+      - BROWSERLESS_HOST=http://browserless:3000
       - BROWSERLESS_TOKEN=${BROWSERLESS_TOKEN}
     container_name: 'analyzer'
     restart: always
